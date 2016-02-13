@@ -5,11 +5,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 // MongoDB
-
 mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/products-demo');
 // mongoose.connection.on('error', function(){});
 
-// Express
+// Express. Instantiate server
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
