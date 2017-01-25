@@ -7,11 +7,13 @@ var express = require('express');
 //we create an instantiate of express
 var app = express();
 var mongojs = require('mongojs');
- var db = ('contactlist',['contactlist'])
+var db = ('contactlist',['contactlist']);
+var bodyParser = require('body-parser');
 
 
-//Set up our static assets to be consumed by express
+//Set up our static assets to be consumed by express including middlewares
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
 
 //make a get request for the data from MongoDB
 app.get('/contactlist',function(req,res){
@@ -21,6 +23,14 @@ app.get('/contactlist',function(req,res){
 		res.json(docs);
 	});
 });
+
+//posting data from the body to the DB
+app.post('/contactlist',function(req,res){
+	console.log(req.body);
+	db.contactlist.insert(req.body,function(err,doc){
+		res.json(doc);
+	})
+})
 
 
 //Assign our listening port for execution and test

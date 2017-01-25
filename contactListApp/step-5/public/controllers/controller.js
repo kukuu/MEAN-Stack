@@ -8,12 +8,31 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
 	
 	//Time to make a get request from the server. sending the data from the server to the controller
 	//the route to the api /contactlist
-	$http.get('/contactlist').
-	then(function(response){
-		$scope.contactlist = response;
-		console.log(response);
-	},function(response){
-		//some error
-		console.log(response);
-	})	
+	//we wrap http.get in a refresh function to dynamically refresh the page when add contact button adds a new  a new contact
+	var refresh = function(){
+		$http.get('/contactlist').
+		then(function(response){
+			$scope.contactlist = response;
+			$scope.contact = '';
+			console.log(response);
+		},function(response){
+			//some error
+			console.log(response);
+		});
+	}
+
+	//Call refresj
+	refresh();
+
+	//todo: Modify success with then: see above
+	$scope.addContact = function(){
+		console.log($scope.contact);
+		$http.post('/contactlist',$scope.contact).
+		success(function(response){
+			console.log(response);
+			refresh();
+		});
+		
+	}
+
 }])
