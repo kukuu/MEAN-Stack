@@ -32,6 +32,15 @@ app.post('/contactlist',function(req,res){
 	})
 })
 
+app.delete('/contactlist:id',function(req,res){
+	//store  id instance
+	var id = req.params.id;
+	console.log(id);
+	db.contactlist.remove({_id:mongojs.Object(id)},function(err,doc){
+		res.json(doc);
+	})
+})
+
 
 //Assign our listening port for execution and test
 app.listen(3079);
