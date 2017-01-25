@@ -30,6 +30,7 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
 		$http.post('/contactlist',$scope.contact).
 		success(function(response){
 			console.log(response);
+			//empties any redundant data and refreshes with update/request
 			refresh();
 		});	
 	}
@@ -37,6 +38,7 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
 	$scope.remove = function(id){
 		console.log(id);
 		$http.delete('/contactlist/' + id).success(function(response){
+			//empties any redundant data and refreshes with update/request
 			refresh();
 		});
 	}
