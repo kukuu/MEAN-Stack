@@ -21,7 +21,7 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
 		});
 	}
 
-	//Call refresj
+	//Call refresh
 	refresh();
 
 	//todo: Modify success with then: see above
