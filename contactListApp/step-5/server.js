@@ -49,15 +49,23 @@ app.get('',function(err,doc){
 app.put('/contactlist/:id',function(req,res){
 	var id = req.params.id;
 	console.log(req.params.name);
-	//findAndModify keys:(query,update,new), callback function
+	//findAndModify takes 2 arguments:
+	// 1. an object for updating the MongoDB db
+	//2. call back function for sending json back to controller
 	db.contactlist.findAndModify(
 		{ 
 			query: {_id: mongojs.ObjectId(id)},
-			update: {$set: {name:req.body.name, email:req.body.email, number: req.body.number}},
+			update: {
+				$set: {
+					name:req.body.name, 
+					email:req.body.email, 
+					number: req.body.number
+				}
+			},
 			new:true
 		},
 		function(err,doc){
-					res.json(doc);
+			res.json(doc);
 		}
 	);
 });

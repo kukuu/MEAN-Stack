@@ -57,4 +57,10 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
 		})
 	};
 
+	$scope.deselect = function(){
+		scope.contact = '';
+	};
+
+	//NOTE: To add a new entry into the database for this application first empty with the clear button
+
 }])
