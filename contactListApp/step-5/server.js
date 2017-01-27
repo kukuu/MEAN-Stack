@@ -49,16 +49,17 @@ app.get('',function(err,doc){
 app.put('/contactlist/:id',function(req,res){
 	var id = req.params.id;
 	console.log(req.params.name);
-	//findAndModify keys:query,update,new, callback function
-	db.contactlist.findAndModify({ 
-		query: {_id: mongojs.ObjectId(id)},
-		update: {$set: {name:req.body.name, email:req.body.email,
-			number: req.body.number}},
-		new:true},
+	//findAndModify keys:(query,update,new), callback function
+	db.contactlist.findAndModify(
+		{ 
+			query: {_id: mongojs.ObjectId(id)},
+			update: {$set: {name:req.body.name, email:req.body.email, number: req.body.number}},
+			new:true
+		},
 		function(err,doc){
-				res.json(doc);
+					res.json(doc);
 		}
-	});
+	);
 });
 
 //Assign our listening port for execution and test
