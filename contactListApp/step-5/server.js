@@ -10,7 +10,6 @@ var mongojs = require('mongojs');
 var db = ('contactlist',['contactlist']);
 var bodyParser = require('body-parser');
 
-
 //Set up our static assets to be consumed by express including middlewares
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
@@ -61,9 +60,6 @@ app.put('/contactlist/:id',function(req,res){
 		}
 	});
 });
-
-
-
 
 //Assign our listening port for execution and test
 app.listen(3079);
