@@ -30,7 +30,7 @@ app.post('/contactlist',function(req,res){
 	db.contactlist.insert(req.body,function(err,doc){
 		res.json(doc);
 	})
-})
+});
 
 app.delete('/contactlist:id',function(req,res){
 	//store  id instance
@@ -39,7 +39,28 @@ app.delete('/contactlist:id',function(req,res){
 	db.contactlist.remove({_id:mongojs.Object(id)},function(err,doc){
 		res.json(doc);
 	})
-})
+});
+
+app.get('',function(err,doc){
+	db.contactlist.finOne({_id:mongojs.ObjectId(id)},function(err,doc){
+		res.json(doc);
+	});
+});
+
+app.put('/contactlist/:id',function(req,res){
+	var id = req.params.id;
+	console.log(req.params.name);
+	//findAndModify keys:query,update,new, callback function
+	db.contactlist.findAndModify({ query: {_id: mongojs.ObjectId(id)},
+		update: {$set: {name:req.body.name, email:req.body.email,
+			number: req.body.number}},
+			new:true}, function(err,doc){
+				res.json(doc);
+			}
+	});
+});
+
+
 
 
 //Assign our listening port for execution and test
